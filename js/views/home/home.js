@@ -1,4 +1,4 @@
-define(['jquery', 'order!underscore', 'backbone', 'views/events/list', 'text!templates/main/index.html'], function($, _, Backbone, eventsList, mainTemplate) {
+define(['jquery', 'order!underscore', 'backbone', 'views/events/list', 'text!templates/main/home.html'], function($, _, Backbone, eventsList, mainTemplate) {
 
   var mainHomeView = Backbone.View.extend({
 
@@ -10,9 +10,7 @@ define(['jquery', 'order!underscore', 'backbone', 'views/events/list', 'text!tem
     render: function() {
       console.log('mainrenter');
 
-      $(this.el).html(this.template({
-        model: this.model
-      }));
+      $(this.el).html(this.template());
 
 
       var events = new eventsList({
@@ -20,6 +18,9 @@ define(['jquery', 'order!underscore', 'backbone', 'views/events/list', 'text!tem
       });
 
       events.render();
+
+      $('.nav li').removeClass('active');
+      $('#home').addClass('active');
 
     }
 
