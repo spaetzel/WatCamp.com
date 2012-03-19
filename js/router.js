@@ -6,6 +6,7 @@ define(['jquery', 'underscore', 'backbone', 'views/home/main'], function($, _, B
   var AppRouter = Backbone.Router.extend({
     routes: {
       'calendar': 'showCalendar',
+      'contribute': 'contribute',
       // Default
       '*actions': 'defaultAction'
     },
