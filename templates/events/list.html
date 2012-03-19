@@ -1,0 +1,16 @@
+ <div class="row">
+ 	<% _.each(topItems, function(curItem){ %>
+ 	<div class="span4">
+ 		<h2><a href="<%=curItem.link %>"><%= curItem.title %></a></h2>
+ 		<p><%= curItem.description %></p>
+ 	</div>
+ 	<% }); %>
+ </div>
+<% _.each(restItems, function(curItem){ %>
+ 	<div class="row">
+ 		<div class="span12">
+ 		<h2><a href="<%=curItem.link %>"><%= curItem.title %></a></h2>
+ 		<p><%= curItem.pubDate %></p>
+ 	</div>
+ 	</div>
+<% }); %>
