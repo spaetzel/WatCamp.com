@@ -2,12 +2,13 @@ var router;
 
 
 // Filename: router.js
-define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calendar', 'views/home/contribute'], function($, _, Backbone, mainHomeView, calendarView, contributeView) {
+define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calendar', 'views/home/contribute', 'views/home/links'], function($, _, Backbone, mainHomeView, calendarView, contributeView,linksView) {
   var AppRouter = Backbone.Router.extend({
     routes: {
       'calendar': 'showCalendar',
       'home': 'defaultAction',
       'contribute': 'showContribute',
+      'links': 'showLinks',
       // Default
       '*actions': 'defaultAction'
     },
@@ -28,6 +29,10 @@ define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calen
     showContribute: function(){
       var contribute = new contributeView();
       contribute.render();
+    },
+    showLinks: function(){
+      var links = new linksView();
+      links.render();
     }
   });
 
