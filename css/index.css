@@ -1,0 +1,25 @@
+a{
+	color: #8ABD50;
+}
+#mainContainer
+{
+	margin-top: 50px;
+}
+
+div{
+	overflow: hidden;
+}
+
+.navbar .nav > li.external{
+	float: right;
+	padding-top: 4px;
+}
+
+.navbar .nav > li.twitter{
+	margin-top: -6px;
+	height: 0px;
+}
+
+.navbar .nav{
+	width: 100%;
+}
