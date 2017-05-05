@@ -1,4 +1,8 @@
-define(['jquery', 'order!underscore', 'backbone', 'text!templates/main/search.html'], function($, _, Backbone, searchTemplate) {
+define(['jquery'
+    , 'order!underscore'
+    , 'backbone'
+    , 'text!templates/main/search.html'
+    ], function($, _, Backbone, searchTemplate) {
 
   var searchView = Backbone.View.extend({
 
