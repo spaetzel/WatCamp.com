@@ -3,8 +3,11 @@ define(['jquery'
     , 'backbone'
     , 'text!templates/main/search.html'
     , 'models/eventlist'
+    , 'models/oneevent'
+    , 'views/events/searchresults'
     ], 
-function($, _, Backbone, searchTemplate, EventList) {
+function($, _, Backbone, searchTemplate, EventList, OneEvent,
+    SearchResultsView) {
 
   function getInput() { 
     var inputSoFar = _.escape(this.$('#searchterms').val());
@@ -16,13 +19,13 @@ function($, _, Backbone, searchTemplate, EventList) {
     searchString = getInput();
 
     // This should trigger a refresh
-    model.fetch(searchString);
+    model.fetch({ data: {q: searchString} } );
 
   }; // end processSearch
 
   var searchView = Backbone.View.extend({
 
-    // I do not know where this bodyArea is defined.
+    // This is defined in index.html
     el: $('#bodyArea'),
 
     initialize: function() {
@@ -33,11 +36,22 @@ function($, _, Backbone, searchTemplate, EventList) {
 
     // Render form using template
     render: function() {
-      $(this.el).html(this.template());
 
       // Make top link "Search" active"
       $('.nav li').removeClass('active');
       $('#search').addClass('active');
+
+      $(this.el).html(this.template());
+      
+      // Populate the list
+      var $list = this.$('ul.#search-results').empty();
+
+      this.model.each(function(oneevent) { 
+        var item = new SearchResultsView({model: oneevent});
+        item.render();
+      }, this); // end each 
+
+      return this;
     }, 
 
     // Register event handlers
@@ -53,14 +67,14 @@ function($, _, Backbone, searchTemplate, EventList) {
 
       inputSoFar = getInput();
       processSearch(this.model);
-      console.log("Input button submitted: " + inputSoFar);
+      // console.log("Input button submitted: " + inputSoFar);
     },
 
     onKeypress: function(evt) { 
       var ENTER_KEY = 13;
       if (evt.which == ENTER_KEY) { 
         processSearch(this.model);
-        console.log("Enter key submitted: " + getInput());
+        // console.log("Enter key submitted: " + getInput());
       }
     } 
 

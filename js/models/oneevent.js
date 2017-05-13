@@ -9,7 +9,6 @@ function(Backbone) {
       location: null,
       start: null,
       htmlLink: null,
-      iCalUID: null,
       description: null
     } 
 

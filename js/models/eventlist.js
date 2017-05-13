@@ -23,9 +23,9 @@ function($, Backbone, _, OneEvent, config) {
 
     // This OVERRIDES backbone.sync
     sync: function(method, model, options) { 
-      console.log("method: " + method);
-      console.log("model: " + JSON.stringify(model));
-      console.log("options: " + JSON.stringify(options));
+      // console.log("method: " + method);
+      // console.log("model: " + JSON.stringify(model));
+      // console.log("options: " + JSON.stringify(options));
 
 
       // Assume method is always 'read'
@@ -37,20 +37,25 @@ function($, Backbone, _, OneEvent, config) {
       var dateNow = new Date();
       var isoDate = dateNow.toISOString();
 
+      extradata = { 
+        key: config.apiKey,
+        maxResults: config.maxResults,
+        orderBy: 'startTime',
+        singleEvents: 'true',
+        timeMin: isoDate,
+        fields: 'items(description,id,location,htmlLink,summary,start)' 
+      } 
+
       var params = _.extend({
         type: 'GET',
         dataType: 'jsonp',
         url: model.url(),
         processData: true,
-        data: {
-          key: config.apiKey,
-          maxResults: config.maxResults,
-          orderBy: 'startTime',
-          singleEvents: 'true',
-          q: 'stem+women',
-          timeMin: isoDate,
-        } 
       }, options);
+
+      _.extend(options.data, extradata);
+
+      // console.log("params: " + JSON.stringify(params));
 
       var result = $.ajax(params);
       return result;
