@@ -55,7 +55,7 @@ function(Backbone, config) {
         if (datestring) { 
           var dateobj = new Date(datestring);
           
-          fmt = new Intl.DateTimeFormat( 'en-US', options);
+          fmt = new Intl.DateTimeFormat(config.locale , options);
 
           return fmt.format(dateobj);
           
