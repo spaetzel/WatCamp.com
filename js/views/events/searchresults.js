@@ -2,10 +2,9 @@ define(['jquery'
     , 'order!underscore'
     , 'backbone'
     , 'text!templates/events/searchresults.html'
-    , 'models/eventlist'
     , 'models/oneevent'
     ], 
-function($, _, Backbone, searchResultTemplate, EventList, OneEvent) {
+function($, _, Backbone, searchResultTemplate, OneEvent) {
 
   var searchResultView = Backbone.View.extend({
     tagName: 'li',
@@ -14,13 +13,16 @@ function($, _, Backbone, searchResultTemplate, EventList, OneEvent) {
 
     initialize: function() {
       this.template = _.template(searchResultTemplate);
-      // Update when we fetch. (How to replace just the list?)
-      // this.listenTo(this.model, 'sync', this.render);
     },
 
     // Render form using template
     render: function() {
-      $('ul#search-results').append(this.template(this.model.toJSON()));
+      // From: https://lostechies.com/derickbailey/2012/04/26/view-helpers-for-underscore-templates/
+
+      data = this.model.toJSON();
+      _.extend(data, { extractHumanDate: this.model.extractHumanDate } );
+
+      $('ul#search-results').append(this.template(data));
 
       // I do not understand why this is even useful
       return this;
