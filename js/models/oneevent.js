@@ -1,7 +1,8 @@
 define([
   'backbone'
+  , 'config'
   ],
-function(Backbone) { 
+function(Backbone, config) { 
   var OneEvent = Backbone.Model.extend({
     defaults: { 
       id: null,
@@ -9,7 +10,11 @@ function(Backbone) {
       location: null,
       start: null,
       htmlLink: null,
-      description: null
+      description: null,
+
+      // This is gross but I do not know how else to pass 
+      // the timezone into a template
+      timezone: config.timezone
     } 
 
   }); // end OneEvent
