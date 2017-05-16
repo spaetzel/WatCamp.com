@@ -42,7 +42,10 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
       $('.nav li').removeClass('active');
       $('#search').addClass('active');
 
-      $(this.el).html(this.template(this.model.toJSON()));
+      // Add latest query to the template
+      data = { latestquery: this.model.getLatestQuery()}
+
+      $(this.el).html(this.template(data));
       
       // Populate the list
       var $list = this.$('ul.#search-results').empty();
@@ -52,6 +55,10 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
       querystring = this.model.getLatestQuery();
       //console.log("querystring = '" + querystring + "'"
       //  + ", length = " + querystring.length);
+      
+      // You should not need to check if querystring exists, because
+      // it is initialized to the empty string. But better to be safe 
+      // than have the page crash.
       if (querystring && 0 !== querystring.length && this.model.isEmpty()) { 
         var noresults = new NoResultsView();
         noresults.render(querystring);
