@@ -89,3 +89,7 @@ ul#search-results li:before {
 ul#search-results { 
     list-style-type: none;
 }
+
+h2.noresults { 
+    margin-top: 2rem;
+} 

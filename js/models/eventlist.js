@@ -9,6 +9,14 @@ function($, Backbone, _, OneEvent, config) {
   var EventList = Backbone.Collection.extend({
     model: OneEvent,
 
+    // This is an instance variable, I think.
+    // It is the text of the latest search
+    latestquery: '',
+
+    getLatestQuery: function() { 
+      return this.latestquery;
+    }, 
+
     // The calendar items are in the "items" dictionary
     parse: function(data) { 
       return data.items;
@@ -33,6 +41,9 @@ function($, Backbone, _, OneEvent, config) {
         console.error("Unsupported sync method: " + method);
         return;
       } // end if 
+
+      this.latestquery = options.data.q;
+      // console.log("Latest query: " + this.latestquery);
 
       var dateNow = new Date();
       var isoDate = dateNow.toISOString();

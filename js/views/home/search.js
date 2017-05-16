@@ -5,9 +5,10 @@ define(['jquery'
     , 'models/eventlist'
     , 'models/oneevent'
     , 'views/events/searchresults'
+    , 'views/events/noresults'
     ], 
 function($, _, Backbone, searchTemplate, EventList, OneEvent,
-    SearchResultsView) {
+    SearchResultsView, NoResultsView) {
 
   function getInput() { 
     var inputSoFar = _.escape(this.$('#searchterms').val());
@@ -41,15 +42,27 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
       $('.nav li').removeClass('active');
       $('#search').addClass('active');
 
-      $(this.el).html(this.template());
+      $(this.el).html(this.template(this.model.toJSON()));
       
       // Populate the list
       var $list = this.$('ul.#search-results').empty();
 
-      this.model.each(function(oneevent) { 
-        var item = new SearchResultsView({model: oneevent});
-        item.render();
-      }, this); // end each 
+      // If you searched for something and there were no results, 
+      // then display an error.
+      querystring = this.model.getLatestQuery();
+      //console.log("querystring = '" + querystring + "'"
+      //  + ", length = " + querystring.length);
+      if (querystring && 0 !== querystring.length && this.model.isEmpty()) { 
+        var noresults = new NoResultsView();
+        noresults.render(querystring);
+
+      } else { 
+        this.model.each(function(oneevent) { 
+          var item = new SearchResultsView({model: oneevent});
+          item.render();
+        }, this); // end each 
+
+      } // end if no results
 
       return this;
     }, 
