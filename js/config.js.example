@@ -1,0 +1,27 @@
+/* From: http://dailyjs.com/post/backbone-tutorial-2
+ */
+define([], function() { 
+  var config = {};
+
+  // Add your key here.
+  // Generate it at console.developers.google.com
+  // You need the Google Calendar API enabled for it
+  config.apiKey = 'Insert-Your-API-key-here';
+
+  // How many search results to return
+  config.maxResults = 20;
+
+  // Which calendar? See src= parameter in the embed.
+  config.calendarID =
+  'nlkc39jt4p0nbc4pk9pj7p5fh0@group.calendar.google.com'; 
+
+  // Needed because stupid Google displays htmlLinks 
+  // in GMT
+  config.timezone = 'America/Toronto';
+
+  // Needed because datetime conversions are terrible.
+  config.locale = 'en-CA';
+
+  return config;
+
+}); 
