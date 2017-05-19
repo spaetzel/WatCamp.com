@@ -6,9 +6,10 @@ define(['jquery'
     , 'models/oneevent'
     , 'views/events/searchresults'
     , 'views/events/noresults'
+    , 'views/events/errorsearch'
     ], 
 function($, _, Backbone, searchTemplate, EventList, OneEvent,
-    SearchResultsView, NoResultsView) {
+    SearchResultsView, NoResultsView, ErrorSearchView) {
 
   function getInput() { 
     var inputSoFar = _.escape(this.$('#searchterms').val());
@@ -17,7 +18,7 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
   }; // end getInput
 
   function processSearch(model) { 
-    searchString = getInput();
+    var searchString = getInput();
 
     // This should trigger a refresh
     model.fetch({ data: {q: searchString} } );
@@ -33,6 +34,7 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
       this.template = _.template(searchTemplate);
       // Update when we fetch. (How to replace just the list?)
       this.listenTo(this.model, 'sync', this.render);
+      this.listenTo(Backbone, 'api-error', this.onAjaxError);
     },
 
     // Render form using template
@@ -43,7 +45,7 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
       $('#search').addClass('active');
 
       // Add latest query to the template
-      data = { latestquery: this.model.getLatestQuery()}
+      var data = { latestquery: this.model.getLatestQuery()}
 
       $(this.el).html(this.template(data));
       
@@ -52,14 +54,21 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
 
       // If you searched for something and there were no results, 
       // then display an error.
-      querystring = this.model.getLatestQuery();
-      //console.log("querystring = '" + querystring + "'"
-      //  + ", length = " + querystring.length);
+
+      var querystring = this.model.getLatestQuery();
+      var latestError = this.model.getLatestError();
+
+      if (0 !== latestError.length) { 
+        var errorsearch = new ErrorSearchView();
+        errorsearch.render(latestError);
       
-      // You should not need to check if querystring exists, because
-      // it is initialized to the empty string. But better to be safe 
-      // than have the page crash.
-      if (querystring && 0 !== querystring.length && this.model.isEmpty()) { 
+      } else if (querystring 
+          && 0 !== querystring.length 
+          && this.model.isEmpty()) { 
+        // You should not need to check if querystring exists, because
+        // it is initialized to the empty string. But better to be safe 
+        // than have the page crash.
+
         var noresults = new NoResultsView();
         noresults.render(querystring);
 
@@ -85,10 +94,10 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
       // Really you want to call the API here from 
       // the model.
 
-      inputSoFar = getInput();
+      var inputSoFar = getInput();
       processSearch(this.model);
       // console.log("Input button submitted: " + inputSoFar);
-    },
+    }, // end onSubmit
 
     onKeypress: function(evt) { 
       var ENTER_KEY = 13;
@@ -96,7 +105,11 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
         processSearch(this.model);
         // console.log("Enter key submitted: " + getInput());
       }
-    } 
+    }, // end onKeypress
+
+    onAjaxError: function(evt) { 
+      this.render();
+    } // end onAjaxError
 
   });
 
