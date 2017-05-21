@@ -19,7 +19,7 @@ define(['jquery', 'order!underscore', 'backbone'], function($, _, Backbone) {
     }, 
 
     toggleHamburgerMenu: function(evt) { 
-      $('.nav-collapse').toggleClass("active");
+      $('.nav-collapse').toggleClass('active');
     }, // end toggleHamburgerMenu
 
     onItemClick: function(evt) { 
