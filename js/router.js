@@ -2,7 +2,7 @@ var router;
 
 
 // Filename: router.js
-define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calendar', 'views/home/contribute', 'views/home/links'], function($, _, Backbone, mainHomeView, calendarView, contributeView,linksView) {
+define(['jquery', 'underscore', 'backbone', 'views/home/hamburger-menu', 'views/home/home', 'views/home/calendar', 'views/home/contribute', 'views/home/links'], function($, _, Backbone, hamburgerMenuView, mainHomeView, calendarView, contributeView,linksView) {
   var AppRouter = Backbone.Router.extend({
     routes: {
       'calendar': 'showCalendar',
@@ -38,6 +38,11 @@ define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calen
 
   var initialize = function() {
       router = new AppRouter;
+
+      // Maybe this is the wrong place to call this, but 
+      // the hamburger menu applies everywhere.
+      hamburgerMenuView = new hamburgerMenuView();
+
       Backbone.history.start();
       };
   return {
