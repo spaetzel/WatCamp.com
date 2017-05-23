@@ -22,7 +22,7 @@ function($, _, Backbone, searchResultTemplate, OneEvent) {
       data = this.model.toJSON();
       _.extend(data, { extractHumanDate: this.model.extractHumanDate } );
 
-      $('ul#search-results').append(this.template(data));
+      $('ul#searchResults').append(this.template(data));
 
       // I do not understand why this is even useful
       return this;

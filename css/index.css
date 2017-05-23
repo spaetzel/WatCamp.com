@@ -50,29 +50,29 @@ div{
 
 /* Format search results. 
  */
-ul#search-results a { 
+#searchResults a { 
     font-size: large;
 } 
 
 /* Separate search results from search bar */
-ul#search-results { 
+#searchResults { 
     margin-top: 2rem;
     margin-left: 0; 
 }
 
 /* Separate search results from each other */
-ul#search-results li { 
+#searchResults li { 
     padding-bottom: 1rem;
     margin-left: 2rem;
     position: relative;
 } 
 
-ul#search-results p.eventlink { 
+#searchResults p.eventLink { 
     margin-bottom: 0;
 }
 
 /* Try green logo bullets */
-ul#search-results li:before { 
+#searchResults li:before { 
     content:' '; 
     display: inline-block; 
     height: 1.5rem;
@@ -86,10 +86,10 @@ ul#search-results li:before {
 } 
 
 /* Hide bullets */
-ul#search-results { 
+#searchResults { 
     list-style-type: none;
 }
 
-h2.noresults { 
+h2.noResults { 
     margin-top: 2rem;
 } 

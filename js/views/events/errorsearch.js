@@ -17,7 +17,7 @@ function($, _, Backbone, errorSearchTemplate) {
     render: function(msg) {
       data = { errormsg: msg };
 
-      $('ul#search-results').replaceWith(this.template(data));
+      $('ul#searchResults').replaceWith(this.template(data));
 
       return this;
     } 

@@ -17,7 +17,7 @@ function($, _, Backbone, noResultsTemplate) {
     render: function(querystring) {
       data = { query: querystring };
 
-      $('ul#search-results').replaceWith(this.template(data));
+      $('ul#searchResults').replaceWith(this.template(data));
 
       // I do not understand why this is even useful
       return this;

@@ -12,7 +12,7 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
     SearchResultsView, NoResultsView, ErrorSearchView) {
 
   function getInput() { 
-    var inputSoFar = _.escape(this.$('#searchterms').val());
+    var inputSoFar = _.escape(this.$('#searchTerms').val());
 
     return inputSoFar;
   }; // end getInput
@@ -50,7 +50,7 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
       $(this.el).html(this.template(data));
       
       // Populate the list
-      var $list = this.$('ul.#search-results').empty();
+      var $list = this.$('ul.#searchResults').empty();
 
       // If you searched for something and there were no results, 
       // then display an error.
@@ -85,8 +85,8 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
 
     // Register event handlers
     events: { 
-      'click #submitsearchform': 'onSubmit',
-      'keypress #searchterms': 'onKeypress',
+      'click #submitSearchForm': 'onSubmit',
+      'keypress #searchTerms': 'onKeypress',
     },
 
     // Event handlers
