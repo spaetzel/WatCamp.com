@@ -20,7 +20,6 @@ define(['jquery', 'order!underscore', 'backbone'], function($, _, Backbone) {
     }, 
 
     toggleHamburgerMenu: function(evt) { 
-      console.log("Got menu toggle button");
       $('.nav-collapse').toggleClass('active');
     }, // end toggleHamburgerMenu
 
