@@ -27,7 +27,7 @@ div{
 /* Embed Google calendar responsively.
  * See: embedresponsively.com
  */
-.embed-container {
+.embedContainer {
     position: relative;
     padding-bottom: 5%;
     overflow: hidden;
@@ -40,7 +40,7 @@ div{
     height: 70em;
 }
 
-.embed-container iframe {
+.embedContainer iframe {
     position: absolute;
     top: 0;
     left: 0;
