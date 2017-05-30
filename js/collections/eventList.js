@@ -2,13 +2,13 @@ define([
     'jquery'
   , 'backbone'
   , 'underscore'
-  , 'models/oneevent'
+  , 'models/event'
   , 'config'
   ],
-function($, Backbone, _, OneEvent, config) { 
-  var EventList = Backbone.Collection.extend({
+function($, Backbone, _, event, config) { 
+  var eventList = Backbone.Collection.extend({
 
-    model: OneEvent,
+    model: event,
 
     // This is an instance variable, I think.
     // It is the text of the latest search
@@ -123,6 +123,6 @@ function($, Backbone, _, OneEvent, config) {
 
   }); // end var
 
-  return EventList;
+  return eventList;
 
 }); // end function

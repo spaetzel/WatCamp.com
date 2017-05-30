@@ -2,7 +2,7 @@ define(['jquery'
     , 'order!underscore'
     , 'backbone'
     , 'text!templates/events/searchresults.html'
-    , 'models/oneevent'
+    , 'models/event'
     ], 
 function($, _, Backbone, searchResultTemplate, OneEvent) {
 

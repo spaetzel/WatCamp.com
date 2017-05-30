@@ -2,7 +2,7 @@ var router;
 
 
 // Filename: router.js
-define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calendar', 'views/home/contribute', 'views/home/links', 'views/home/search', 'models/eventlist'], function($, _, Backbone, mainHomeView, calendarView, contributeView,linksView,searchView, EventList) {
+define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calendar', 'views/home/contribute', 'views/home/links', 'views/home/search', 'collections/eventList'], function($, _, Backbone, mainHomeView, calendarView, contributeView,linksView,searchView, eventList) {
 
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -35,8 +35,8 @@ define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calen
       links.render();
     },
     showSearch: function(){
-      var eventList = new EventList();
-      var search = new searchView({ model: eventList });
+      var eventListVar = new eventList();
+      var search = new searchView({ model: eventListVar });
       search.render();
     }
   });

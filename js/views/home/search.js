@@ -2,14 +2,14 @@ define(['jquery'
     , 'order!underscore'
     , 'backbone'
     , 'text!templates/main/search.html'
-    , 'models/eventlist'
-    , 'models/oneevent'
-    , 'views/events/searchresults'
-    , 'views/events/noresults'
-    , 'views/events/errorsearch'
+    , 'collections/eventList'
+    , 'models/event'
+    , 'views/events/searchResults'
+    , 'views/events/noResults'
+    , 'views/events/errorSearch'
     ], 
-function($, _, Backbone, searchTemplate, EventList, OneEvent,
-    SearchResultsView, NoResultsView, ErrorSearchView) {
+function($, _, Backbone, searchTemplate, eventList, event,
+    searchResultsView, noResultsView, errorSearchView) {
 
   function getInput() { 
     var inputSoFar = _.escape(this.$('#searchTerms').val());
@@ -59,7 +59,7 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
       var latestError = this.model.getLatestError();
 
       if (0 !== latestError.length) { 
-        var errorsearch = new ErrorSearchView();
+        var errorsearch = new errorSearchView();
         errorsearch.render(latestError);
       
       } else if (querystring 
@@ -69,12 +69,12 @@ function($, _, Backbone, searchTemplate, EventList, OneEvent,
         // it is initialized to the empty string. But better to be safe 
         // than have the page crash.
 
-        var noresults = new NoResultsView();
+        var noresults = new noResultsView();
         noresults.render(querystring);
 
       } else { 
-        this.model.each(function(oneevent) { 
-          var item = new SearchResultsView({model: oneevent});
+        this.model.each(function(event) { 
+          var item = new searchResultsView({model: event});
           item.render();
         }, this); // end each 
 

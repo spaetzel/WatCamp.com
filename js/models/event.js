@@ -3,7 +3,7 @@ define([
   , 'config'
   ],
 function(Backbone, config) { 
-  var OneEvent = Backbone.Model.extend({
+  var event = Backbone.Model.extend({
     defaults: { 
       id: null,
       summary: null, // actually the title
@@ -65,8 +65,8 @@ function(Backbone, config) {
       } // end extractHumanDate
 
 
-  }); // end OneEvent
+  }); // end event
 
-  return OneEvent;
+  return event;
 
 }); // end function
