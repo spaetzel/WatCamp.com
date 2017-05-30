@@ -41,7 +41,7 @@ define(['jquery', 'underscore', 'backbone', 'views/home/hamburger-menu', 'views/
 
       // Maybe this is the wrong place to call this, but 
       // the hamburger menu applies everywhere.
-      hamburgerMenuView = new hamburgerMenuView();
+      hamburgerMenuView = new hamburgerMenuView( {el: $('.navbar')} );
 
       Backbone.history.start();
       };

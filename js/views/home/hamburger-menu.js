@@ -2,11 +2,12 @@ define(['jquery', 'order!underscore', 'backbone'], function($, _, Backbone) {
 
   var hamburgerMenuView = Backbone.View.extend({
 
-    el: $('.navbar'),
-
-    initialize: function() { 
+    initialize: function(options) { 
       // Add a class to all menu items so we can tell when 
       // they have been clicked.
+      _.extend(this, options.el);
+
+
       $('ul.nav li').addClass('navitem');
     }, 
 
@@ -19,6 +20,7 @@ define(['jquery', 'order!underscore', 'backbone'], function($, _, Backbone) {
     }, 
 
     toggleHamburgerMenu: function(evt) { 
+      console.log("Got menu toggle button");
       $('.nav-collapse').toggleClass('active');
     }, // end toggleHamburgerMenu
 
