@@ -47,3 +47,49 @@ div{
     width: 100%;
     height: 100%;
 }
+
+/* Format search results. 
+ */
+#searchResults a { 
+    font-size: large;
+} 
+
+/* Separate search results from search bar */
+#searchResults { 
+    margin-top: 2rem;
+    margin-left: 0; 
+}
+
+/* Separate search results from each other */
+#searchResults li { 
+    padding-bottom: 1rem;
+    margin-left: 2rem;
+    position: relative;
+} 
+
+#searchResults p.eventLink { 
+    margin-bottom: 0;
+}
+
+/* Try green logo bullets */
+#searchResults li:before { 
+    content:' '; 
+    display: inline-block; 
+    height: 1.5rem;
+    width: 1.5rem;
+    background-image: url('../img/watcamp-logo-green.svg');
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    position: absolute;
+    padding-left: 2rem; 
+    left: -2rem; 
+} 
+
+/* Hide bullets */
+#searchResults { 
+    list-style-type: none;
+}
+
+h2.noResults { 
+    margin-top: 2rem;
+} 

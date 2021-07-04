@@ -2,13 +2,15 @@ var router;
 
 
 // Filename: router.js
-define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calendar', 'views/home/contribute', 'views/home/links'], function($, _, Backbone, mainHomeView, calendarView, contributeView,linksView) {
+define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calendar', 'views/home/contribute', 'views/home/links', 'views/home/search', 'collections/eventList'], function($, _, Backbone, mainHomeView, calendarView, contributeView,linksView,searchView, eventList) {
+
   var AppRouter = Backbone.Router.extend({
     routes: {
       'calendar': 'showCalendar',
       'home': 'defaultAction',
       'contribute': 'showContribute',
       'links': 'showLinks',
+      'search': 'showSearch',
       // Default
       '*actions': 'defaultAction'
     },
@@ -23,8 +25,6 @@ define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calen
     showCalendar: function(source) {
       var calendar = new calendarView();
       calendar.render();
- 
-
     },
     showContribute: function(){
       var contribute = new contributeView();
@@ -33,6 +33,11 @@ define(['jquery', 'underscore', 'backbone', 'views/home/home', 'views/home/calen
     showLinks: function(){
       var links = new linksView();
       links.render();
+    },
+    showSearch: function(){
+      var eventListVar = new eventList();
+      var search = new searchView({ model: eventListVar });
+      search.render();
     }
   });
 
