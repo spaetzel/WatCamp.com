@@ -24,6 +24,12 @@ div{
 	width: 100%;
 }
 
+/* Make navbar menu expand when "active" class is set.
+ */
+.nav-collapse.active { 
+  height: auto !important;
+}
+
 /* Embed Google calendar responsively.
  * See: embedresponsively.com
  */
